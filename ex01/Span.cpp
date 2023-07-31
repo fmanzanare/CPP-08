@@ -6,7 +6,7 @@
 /*   By: fmanzana <fmanzana@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:12:47 by fmanzana          #+#    #+#             */
-/*   Updated: 2023/07/31 10:47:22 by fmanzana         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:10:43 by fmanzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterato
 	if ((this->_pos + 1) > this->_limit)
 		throw SpanFullException();
 	this->_v->insert((this->_v->begin() + this->_pos), begin, end);
+	this->_max = *std::max_element(begin, end);
+	this->_min = *std::min_element(begin, end);
 	this->_pos += std::distance(begin, end);
 }
 
@@ -110,7 +112,6 @@ int Span::longestSpan(void) {
 	return (this->_max - this->_min);
 }
 
-// TESTING PURPOSES!!!
 std::vector<int> Span::getVector(void) {
 	return (*this->_v);
 }

@@ -6,7 +6,7 @@
 /*   By: fmanzana <fmanzana@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:07:30 by fmanzana          #+#    #+#             */
-/*   Updated: 2023/07/31 10:47:17 by fmanzana         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:10:39 by fmanzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ class Span {
 		int shortestSpan(void);
 		int longestSpan(void);
 
-		// TESTING PURPOSES!!
 		std::vector<int> getVector(void);
 		int getPos(void);
 

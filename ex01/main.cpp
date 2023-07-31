@@ -6,7 +6,7 @@
 /*   By: fmanzana <fmanzana@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:49:27 by fmanzana          #+#    #+#             */
-/*   Updated: 2023/07/31 10:46:22 by fmanzana         ###   ########.fr       */
+/*   Updated: 2023/07/31 11:10:13 by fmanzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,16 @@ int main(void) {
 	}
 	std::cout << std::endl;
 	std::cout << "s3 num of elements (after inserting another vector): " << s3.getPos() << std::endl;
+
+	std::vector<int> v2;
+	Span s4 = Span(20000);
+	for (int i = 0; i < 20000; i++) {
+		v2.push_back(i);
+	}
+	s4.addNumber(v2.begin(), v2.end());
+	std::cout << "s4 num of elements: " << s4.getPos() << std::endl;
+	std::cout << "s4 ShortestSpan: " << s4.shortestSpan() << std::endl;
+	std::cout << "s4 LongestSpan: " << s4.longestSpan() << std::endl;
 
 	return (0);
 }
