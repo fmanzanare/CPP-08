@@ -6,7 +6,7 @@
 /*   By: fmanzana <fmanzana@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:12:47 by fmanzana          #+#    #+#             */
-/*   Updated: 2023/07/30 17:30:17 by fmanzana         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:47:22 by fmanzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ Span::Span(unsigned int N) {
 	this->_v = new std::vector<int>(N, 0);
 	this->_pos = 0;
 	this->_limit = N;
+	this->_max = INT_MIN;
+	this->_min = INT_MAX;
 }
 
 Span::~Span() {
@@ -43,6 +45,8 @@ Span::Span(const Span &cp) {
 		(*this->_v)[i] = cp._v->at(i);
 	}
 	this->_pos = cp._pos;
+	this->_max = cp._max;
+	this->_min = cp._min;
 }
 
 Span &Span::operator=(const Span &cp) {
@@ -53,6 +57,8 @@ Span &Span::operator=(const Span &cp) {
 		(*this->_v)[i] = cp._v->at(i);
 	}
 	this->_pos = cp._pos;
+	this->_max = cp._max;
+	this->_min = cp._min;
 	return (*this);
 }
 
@@ -62,7 +68,18 @@ void Span::addNumber(int num) {
 	}
 
 	(*this->_v)[this->_pos] = num;
+	if (num > this->_max)
+		this->_max = num;
+	if (num < this->_min)
+		this->_min = num;
 	this->_pos++;
+}
+
+void Span::addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end) {
+	if ((this->_pos + 1) > this->_limit)
+		throw SpanFullException();
+	this->_v->insert((this->_v->begin() + this->_pos), begin, end);
+	this->_pos += std::distance(begin, end);
 }
 
 int Span::shortestSpan(void) {
@@ -90,16 +107,14 @@ int Span::longestSpan(void) {
 		throw TooFewValuesStored();
 	}
 
-	int min = INT_MAX;
-	int max = INT_MIN;
-	for (int i = 0; i < (int)this->_pos; i++) {
-		if (this->_v->at(i) < min) {
-			min = this->_v->at(i);
-		}
-		if (this->_v->at(i) > max) {
-			max = this->_v->at(i);
-		}
-	}
+	return (this->_max - this->_min);
+}
 
-	return (max - min);
+// TESTING PURPOSES!!!
+std::vector<int> Span::getVector(void) {
+	return (*this->_v);
+}
+
+int Span::getPos(void) {
+	return (this->_pos);
 }

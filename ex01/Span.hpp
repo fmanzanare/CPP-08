@@ -6,7 +6,7 @@
 /*   By: fmanzana <fmanzana@student.42malaga.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/30 15:07:30 by fmanzana          #+#    #+#             */
-/*   Updated: 2023/07/30 16:51:59 by fmanzana         ###   ########.fr       */
+/*   Updated: 2023/07/31 10:47:17 by fmanzana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,15 @@
 #include <vector>
 #include <limits>
 #include <iostream>
+#include <iterator>
 
 class Span {
 	private:
 		std::vector<int>	*_v;
 		unsigned int		_pos;
 		unsigned int		_limit;
+		int					_max;
+		int					_min;
 		Span();
 	public:
 		Span(unsigned int N);
@@ -30,8 +33,13 @@ class Span {
 		Span(const Span &cp);
 		Span &operator=(const Span &cp);
 		void addNumber(int num);
+		void addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);
 		int shortestSpan(void);
 		int longestSpan(void);
+
+		// TESTING PURPOSES!!
+		std::vector<int> getVector(void);
+		int getPos(void);
 
 		class SpanFullException;
 		class TooFewValuesStored;
